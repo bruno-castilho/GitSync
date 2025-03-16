@@ -13,8 +13,18 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useState } from 'react'
+import { LinkCustom } from './styles'
+import { ThemeSwitch } from '@/components/ThemeSwitch'
 
-const pages = ['Início', 'Repositórios']
+interface page {
+  name: string
+  to: string
+}
+
+const pages: page[] = [
+  { name: 'Início', to: '/inicio' },
+  { name: 'Repositórios', to: '/repositorios' },
+]
 
 export function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
@@ -58,23 +68,29 @@ export function Header() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
-                </MenuItem>
+              {pages.map(({ name, to }) => (
+                <LinkCustom href={to} key={name}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography sx={{ textAlign: 'center' }}>{name}</Typography>
+                  </MenuItem>
+                </LinkCustom>
               ))}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+            {pages.map(({ name, to }) => (
+              <LinkCustom href={to} key={name}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {name}
+                </Button>
+              </LinkCustom>
             ))}
+          </Box>
+          <Box>
+            <ThemeSwitch />
           </Box>
         </Toolbar>
       </Container>

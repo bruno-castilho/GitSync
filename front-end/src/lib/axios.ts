@@ -1,9 +1,10 @@
+import { env } from '@/env'
 import axios from 'axios'
 
 export const github = axios.create({
-  baseURL: 'https://api.github.com/',
+  baseURL: env.GIT_HUB_URL,
 })
 
 export const backend = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: env.BACK_END_URL,
 })

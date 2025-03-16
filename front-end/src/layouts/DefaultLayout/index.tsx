@@ -23,6 +23,7 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
 
   useEffect(() => {
     connectToNotifications(handleNotificaion)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

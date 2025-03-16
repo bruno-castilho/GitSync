@@ -21,8 +21,8 @@ export function SearchBar() {
   const { register, handleSubmit } = useForm<SearchFormInputs>({
     resolver: zodResolver(searchFormSchema),
     values: {
-      query
-    }
+      query,
+    },
   })
 
   function handleSearch(data: SearchFormInputs) {

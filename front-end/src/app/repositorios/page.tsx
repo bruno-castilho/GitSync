@@ -1,18 +1,18 @@
 import { Card } from '@mui/material'
 import { Header } from './components/Header'
-
 import { getRepositories } from '@/api/back-end/getRepositories'
 import { RepositoriesTable } from './components/RepositoriesTable'
 import { PageContainer } from './styles'
+export const dynamic = 'force-dynamic'
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     query?: string
     orderBy?: 'asc' | 'desc'
     sortBy?: 'name' | 'user_name' | 'stars'
     page?: number
     perPage?: number
-  }
+  }>
 }
 
 export default async function Page(props: PageProps) {

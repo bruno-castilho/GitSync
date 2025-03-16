@@ -1,0 +1,46 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+  rabbitmq:
+   image: rabbitmq:3-management
+   container_name: rabbitmq-my
+   ports:
+     - "5672:5672"
+     - "15672:15672"
+   volumes:
+     - rabbitmq_data:/var/lib/rabbitmq
+  load_repositories:
+    build: ./load_repositories
+    environment:
+      DATABASE_URL: mysql://root:root@mariadb:3306/db
+  back-end:
+    build: ./back-end
+    environment:
+      DATABASE_URL: mysql://root:root@mariadb:3306/db
+  front-end:
+    build: ./front-end
+    environment:
+      BACK_END_URL: http://back-end:3000/api
+  nginx:    
+      image: nginx:stable-alpine
+      restart: always
+      ports:
+        - "8080:8080"                
+      volumes:          
+        - ./nginx/config:/etc/nginx/conf.d/
+        - ./nginx/logs:/var/log/nginx/ 
+  
+
+volumes:
+ rabbitmq_data:
+ mariadb_data:

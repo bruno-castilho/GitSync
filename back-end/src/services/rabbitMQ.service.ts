@@ -2,6 +2,7 @@ import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
 import { connect, Channel, Connection, ConsumeMessage } from 'amqplib'
 import { randomUUID } from 'crypto'
 import { Observable } from 'rxjs'
+import { env } from 'src/env'
 
 @Injectable()
 export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
@@ -9,7 +10,7 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
   private channel: Channel
 
   async onModuleInit() {
-    this.connection = await connect('amqp://localhost')
+    this.connection = await connect(env.RMQ_URL)
     this.channel = await this.connection.createChannel()
   }
 

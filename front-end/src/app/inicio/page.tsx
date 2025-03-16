@@ -4,12 +4,13 @@ import { searchUsers } from '@/api/github/searchUsers'
 import { notFound } from 'next/navigation'
 import { getUser } from '@/api/github/getUser'
 import { PageContainer, SearchBarContainer } from './style'
+export const dynamic = 'force-dynamic'
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     query?: string
     page: number
-  }
+  }>
 }
 
 export default async function Page(props: PageProps) {

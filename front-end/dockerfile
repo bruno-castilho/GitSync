@@ -1,5 +1,9 @@
 FROM node:20-alpine
 
+ARG BACK_END_URL=http://localhost:8080/api
+
+ENV BACK_END_URL=${BACK_END_URL}
+
 WORKDIR /app
 COPY . .
 RUN npm install

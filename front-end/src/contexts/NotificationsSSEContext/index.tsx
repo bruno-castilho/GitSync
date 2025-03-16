@@ -1,4 +1,5 @@
 'use client'
+import { env } from '@/env'
 import { PayloadNotificationsQueue } from '@/types/PayloadNotificationsQueue'
 import { createContext, ReactNode } from 'react'
 
@@ -30,7 +31,7 @@ export function NotificationsSSEContextProvider({
     handleNotificaion: (data: PayloadNotificationsQueue) => void,
   ) {
     const eventSource = new EventSource(
-      `http://localhost:3000/notifications/sse/${notificationConnectionID}`,
+      `${env.BACK_END_URL}/notifications/sse/${notificationConnectionID}`,
     )
 
     eventSource.onmessage = function (event) {

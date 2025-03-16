@@ -4,9 +4,10 @@ import { notFound } from 'next/navigation'
 import { getRepositories } from '@/api/github/getRepositories'
 import { PageContainer, PageContent } from './styles'
 import { RepositoryList } from './components/RepositoryList'
+export const dynamic = 'force-dynamic'
 
 interface PageProps {
-  params: { username: string }
+  params: Promise<{ username: string }>
 }
 
 export default async function Page({ params }: PageProps) {

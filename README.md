@@ -26,12 +26,12 @@
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/bruno-castilho/desafio-neo-credito.git
+   git clone https://github.com/bruno-castilho/GitSync.git
    ```
 
 2. Entre na pasta do projeto:
    ```bash
-   cd desafio-neo-credito
+   cd GitSync
    ```
 
 3. Execute os containers:
@@ -42,7 +42,7 @@
 ## Acessos
 
 - **Aplicação Front-End**: Pode ser acessada em [localhost:8080](http://localhost:8080)
-- **Documentação do Back-End**: A documentação da API está disponível em [localhost:8080/docs](http://localhost:8080/docs)
+- **Documentação do Back-End**: A documentação da API está disponível em [localhost:8080/api/docs](http://localhost:8080/api/docs)
 - **Dashboard do RabbitMQ**: Acesse a dashboard do RabbitMQ em [localhost:8080/rmq](http://localhost:8080/rmq)
 
 ## Limitação da API do GitHub

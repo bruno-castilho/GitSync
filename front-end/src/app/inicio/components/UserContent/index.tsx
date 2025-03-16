@@ -1,47 +1,59 @@
-import { Avatar, Box, Button, Typography } from '@mui/material'
+import { CardMembershipSharp, PeopleOutlineSharp } from '@mui/icons-material'
+import { Box, Typography } from '@mui/material'
+import {
+  LinkCustom,
+  SpanCounter,
+  UserAvatar,
+  UserContentCard,
+  UserContentContainer,
+  UserContentHeader,
+} from './styles'
+import { UserGitHub } from '@/types/UserGitHub'
 
-export function UserContent() {
+interface UserContentProps {
+  user: UserGitHub
+}
+
+export function UserContent({ user }: UserContentProps) {
   return (
-    <Box sx={{ minWidth: { xs: '100%', sm: 300 } }}>
-      <Box sx={{ display: { xs: 'flex', sm: 'block' } }}>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar
-            alt="Bruno Castilho"
-            src="https://avatars.githubusercontent.com/u/59142847?v=4"
-            sx={{
-              height: { xs: 96, sm: 192 },
-              width: { xs: 96, sm: 192 },
-            }}
-          />
-        </Box>
-        <Box sx={{ m: 2 }}>
-          <Typography gutterBottom variant="h5" component="div">
-          <strong>Bruno da Silva Castilho</strong>
-          </Typography>
-          <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
-            bruno-castilho
-          </Typography>
+    <UserContentCard>
+      <UserContentContainer>
+        <UserAvatar alt={user.name} src={user.avatar_url} />
 
-          <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-            Full Stack Developer
-          </Typography>
+        <Box>
+          <UserContentHeader>
+            <LinkCustom href={`/${user.login}`}>
+              <Typography variant="h6" color="primary">
+                {user.name}
+              </Typography>
+            </LinkCustom>
 
-          <Box>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              <strong>6</strong> followers · <strong>13</strong> following
-            </Typography>
+            <LinkCustom href={`/${user.login}`}>
+              <Typography variant="h6" sx={{ color: 'text.secondary' }}>
+                {user.login}
+              </Typography>
+            </LinkCustom>
+          </UserContentHeader>
+
+          <Box sx={{ width: '400px' }}>
+            <Typography>{user.bio}</Typography>
+          </Box>
+
+          <Box display="flex" gap={1}>
+            <Typography variant="body2">{user.location}</Typography>
+
+            <SpanCounter component="span">
+              <CardMembershipSharp fontSize="inherit" />
+              <Typography variant="body2">{user.public_repos}</Typography>
+            </SpanCounter>
+
+            <SpanCounter component="span">
+              <PeopleOutlineSharp fontSize="inherit" />
+              <Typography variant="body2">{user.followers}</Typography>
+            </SpanCounter>
           </Box>
         </Box>
-      </Box>
-      <Button size="small" variant="contained" fullWidth>
-        Exportar Repositórios
-      </Button>
-    </Box>
+      </UserContentContainer>
+    </UserContentCard>
   )
 }

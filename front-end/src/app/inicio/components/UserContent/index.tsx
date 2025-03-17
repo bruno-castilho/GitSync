@@ -35,7 +35,7 @@ export function UserContent({ user }: UserContentProps) {
             </LinkCustom>
           </UserContentHeader>
 
-          <Box sx={{ width: '400px' }}>
+          <Box>
             <Typography>{user.bio}</Typography>
           </Box>
 

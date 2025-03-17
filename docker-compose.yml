@@ -10,22 +10,33 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
   rabbitmq:
-   image: rabbitmq:3-management
-   container_name: rabbitmq-my
-   volumes:
-     - rabbitmq_data:/var/lib/rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
   load_repositories:
     build: ./load_repositories
     environment:
       DATABASE_URL: mysql://root:root@mariadb:3306/db
+    depends_on:
+        - mariadb
+        - rabbitmq
   back-end:
     build: ./back-end
     environment:
       DATABASE_URL: mysql://root:root@mariadb:3306/db
+    depends_on:
+        - mariadb
+        - rabbitmq
   front-end:
     build: ./front-end
     environment:
       BACK_END_URL: http://back-end:3000/api
+    
+    depends_on:
+        - back-end
   nginx:    
       image: nginx:stable-alpine
       restart: always
@@ -34,6 +45,11 @@ services:
       volumes:          
         - ./nginx/config:/etc/nginx/conf.d/
         - ./nginx/logs:/var/log/nginx/ 
+
+      depends_on:
+        - front-end
+        - back-end
+        - rabbitmq
   
 
 volumes:

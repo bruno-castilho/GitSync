@@ -11,11 +11,11 @@ import {
 import Link from 'next/link'
 
 export const UserContentCard = styled(Card)<CardProps>({
-  width: '700px',
+  maxWidth: '700px',
+  width: '100%'
 })
 
 export const UserContentContainer = styled(Box)<BoxProps>(({ theme }) => ({
-  width: '700px',
   display: 'flex',
   justifyContent: 'left',
   gap: theme.spacing(1),
@@ -35,6 +35,7 @@ export const UserContentHeader = styled(Box)<BoxProps>(({ theme }) => ({
   gap: theme.spacing(1),
   textAlign: 'center',
 }))
+
 
 export const SpanCounter = styled(Box)<BoxProps>(({ theme }) => ({
   display: 'flex',
